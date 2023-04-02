@@ -21,5 +21,5 @@ Sample sample;
 
 int main()
 {
-	Delegator<void()>::Execute();
+	invoke(Delegator<void()>::Execute);
 }
