@@ -9,7 +9,7 @@ void invoke(void(*f)())
 }
 
 class Sample
-	: Delegator<void()>
+	: MultipleDelegator<void()>
 {
 	void callback() override
 	{
@@ -21,5 +21,5 @@ Sample sample;
 
 int main()
 {
-	invoke(Delegator<void()>::Execute);
+	invoke(MultipleDelegator<void()>::Execute);
 }
