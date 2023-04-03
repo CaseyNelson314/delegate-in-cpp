@@ -6,26 +6,67 @@ void Invoke(void(*f)())
 	f();
 }
 
+class TwoWire
+{
+	void(*f)(int);
+public:
+	void update()
+	{
+		f(100);
+	}
+	void onReceive(void(*cb)(int))
+	{
+		f = cb;
+	}
+};
+
+#include <functional>
+
 struct Sample
 {
 	Delegator<Sample, void()> onReceive;
+	int value;
 
-	Sample()
+	Sample(TwoWire& wire, int value)
 		: onReceive(this, &Sample::cb)
+		, value(value)
 	{
-		//Invoke();
+		wire.onReceive([](int) {
+			});
 	}
 
 	void cb()
 	{
-		std::cout << "call";
+		std::cout << "call" << value;
 	}
 
 };
 
-Sample samle;
+
+
+
+class S
+{
+
+};
+
+TwoWire Wire;
+TwoWire Wire1;
+
+
+Sample samle(Wire, 1);
+Sample samle1(Wire1, 2);
+
+
 
 int main()
 {
-	Delegator<Sample, void()>::Execute();
+
+	Wire.onReceive([](int) {
+		std::cout << "hogehoge";
+		});
+
+	Wire.update();
+	Wire1.update();
+
 }

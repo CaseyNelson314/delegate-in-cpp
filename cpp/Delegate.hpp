@@ -55,16 +55,16 @@ Delegator<R(Args...)>* Delegator<R(Args...)>::p = nullptr;
 
 
 /// @brief 複数のメンバ関数を管理するデリゲータ
-template<class> class MultipleDelegator;  // 前方宣言
+template<class> class MultipleCastDelegator;  // 前方宣言
 
 /// @brief 複数のメンバ関数を管理するデリゲータ
 /// @tparam R 静的関数の戻り値
 /// @tparam ...Args 静的関数の引数
 template<class R, class... Args>
-class MultipleDelegator<R(Args...)>
+class MultipleCastDelegator<R(Args...)>
 {
 
-	static std::vector<MultipleDelegator*> pList;
+	static std::vector<MultipleCastDelegator*> pList;
 
 public:
 
@@ -98,7 +98,7 @@ public:
 
 protected:
 
-	MultipleDelegator()
+	MultipleCastDelegator()
 	{
 		pList.push_back(this);
 	}
@@ -108,5 +108,5 @@ protected:
 };
 
 template<class R, class... Args>
-std::vector<MultipleDelegator<R(Args...)>*> MultipleDelegator<R(Args...)>::pList;
+std::vector<MultipleCastDelegator<R(Args...)>*> MultipleCastDelegator<R(Args...)>::pList;
 

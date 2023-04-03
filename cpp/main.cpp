@@ -9,7 +9,7 @@ void invoke(void(*f)())
 }
 
 class Sample
-	: MultipleDelegator<void()>
+	: MultipleCastDelegator<void()>
 {
 	void callback() override
 	{
@@ -21,5 +21,5 @@ Sample sample;
 
 int main()
 {
-	invoke(MultipleDelegator<void()>::Execute);
+	invoke(MultipleCastDelegator<void()>::Execute);
 }

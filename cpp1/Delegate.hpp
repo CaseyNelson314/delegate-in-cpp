@@ -53,13 +53,13 @@ typename Delegator<T, R(Args...)>::Functor Delegator<T, R(Args...)>::functionPtr
 #include <vector>
 
 /// @brief 複数のメンバ関数を管理するデリゲータ
-template<class, class> class MultipleDelegator;  // 前方宣言
+template<class, class> class MultipleCastDelegator;  // 前方宣言
 
 /// @brief 複数のメンバ関数を管理するデリゲータ
 /// @tparam R 静的関数の戻り値
 /// @tparam ...Args 静的関数の引数
 template<class T, class R, class... Args>
-class MultipleDelegator<T, R(Args...)>
+class MultipleCastDelegator<T, R(Args...)>
 {
 
 	using Functor = R(T::*)(Args...);
@@ -74,7 +74,7 @@ class MultipleDelegator<T, R(Args...)>
 
 public:
 
-	MultipleDelegator(T* obj, Functor callback)
+	MultipleCastDelegator(T* obj, Functor callback)
 	{
 		functions.push_back({ obj, callback });
 	}
@@ -115,5 +115,5 @@ public:
 };
 
 template<class T, class R, class... Args>
-std::vector<typename MultipleDelegator<T, R(Args...)>::MemberFuction> MultipleDelegator<T, R(Args...)>::functions;
+std::vector<typename MultipleCastDelegator<T, R(Args...)>::MemberFuction> MultipleCastDelegator<T, R(Args...)>::functions;
 
